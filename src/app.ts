@@ -6,6 +6,7 @@ import cron from "node-cron";
 
 import logger from "./middlewares/logger/logger";
 import { fetchAndUpdateCryptoData } from "./utils/cronjob";
+import coinRoutes from "./routes/coin.routes";
 
 dotenv.config();
 
@@ -17,6 +18,9 @@ app.use(logger);
 
 // Schedule the task to run every two hours
 cron.schedule("0 */2 * * *", fetchAndUpdateCryptoData);
+
+// api
+app.use("/api/v1/coin", coinRoutes);
 
 // Connect to MongoDB
 mongoose
